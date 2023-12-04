@@ -24,6 +24,7 @@ def possible_games(games, p2 = False):
         game = games[i]
         game_maxes = {'red': 0, 'blue': 0, 'green': 0}
         for set in game.split('; '):
+            # create dict with red, green, blue keys and respective values
             dictionary = dict((y.strip(), int(x.strip()))
              for x, y in (element.split(' ') 
              for element in set.split(', ')))

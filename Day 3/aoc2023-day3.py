@@ -4,13 +4,16 @@ from math import prod
 
 def check_adjacent_symbols(curr_line, input_array, i, special_chars, total_sum):
     empty_line = '.' * len(curr_line)
-    input_array_with_empy_lines = [empty_line] + input_array + [empty_line]
+    # shift all lines by 1 empty line so they all have a line above and below
+    # and provides safety from index out of range errors
+    input_array_with_empy_lines = [empty_line] + input_array + [empty_line] 
 
     for num in re.finditer(r'\d+', curr_line):
         num_start, num_end = num.span()
         num_start, num_end = max(num_start - 1, 0), min(num_end + 1, len(curr_line))
         adjacent_chars = []
 
+        # for each found num get adjacent chars above, on the sides and below
         for row in input_array_with_empy_lines[i:i+3]:
             adjacent_chars.append(row[num_start:num_end])
 
@@ -73,9 +76,11 @@ def check_gears(curr_line, input_array, i, gear_char, total_sum):
         adjacent_nums = []
 
         for row in input_array_with_empy_lines[i:i+3]:
+            # find num on rows above, on the sides, below
             for num in re.finditer(r'\d+', row):
                 num_start, num_end = num.span()
                 
+                # check if gear char index is between num start and end index 
                 if gear_start in range(num_start - 1, num_end + 1):
                     adjacent_nums.append(int(num.group(0)))
         
