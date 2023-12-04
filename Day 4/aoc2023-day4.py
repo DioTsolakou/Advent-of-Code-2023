@@ -6,7 +6,7 @@ def get_total_points(input_array, p2=False):
     input_len = len(input_array)
 
     total_cards = []
-    total_cards = defaultdict(lambda: 0 * len(input_array))
+    total_cards = defaultdict(lambda: 0 * len(input_array)) # init dict with length of input and default value of 0
 
     for i in range(input_len):
         total_cards[i] += 1
@@ -18,7 +18,7 @@ def get_total_points(input_array, p2=False):
 
         if p2 and card_occurrences:
             for j in range(min(i + 1, input_len), min(i + (1*card_occurrences) + 1, input_len)):
-                total_cards[j] += total_cards[i]
+                total_cards[j] += total_cards[i] # add to next cards the amount of instances (original + copies) of current card
         elif card_occurrences:
             total_sum += 1 * pow(2, card_occurrences - 1)
     
